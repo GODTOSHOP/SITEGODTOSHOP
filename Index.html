@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>گادتوشاپ</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap');
+
+body {
+  margin:0;
+  padding:0;
+  font-family:'Vazirmatn', Tahoma, sans-serif;
+  overflow-x:hidden;
+  position:relative;
+  background: linear-gradient(135deg,#0f0c29,#302b63,#24243e);
+  color:#fff;
+}
+canvas#stars { position:fixed; top:0; left:0; width:100%; height:100%; z-index:-1; }
+
+header { text-align:center; padding:25px; }
+header img { max-width:180px; border-radius:20px; box-shadow:0 0 35px #0ff; transition:0.5s; filter: drop-shadow(0 0 15px #0ff);}
+header img:hover { transform: scale(1.1) rotate(-5deg); box-shadow:0 0 70px #0ff; filter: drop-shadow(0 0 25px #0ff); }
+
+section { padding:40px; max-width:1000px; margin:auto; }
+h1,h2 { text-align:center; color:#fff; text-shadow: 1px 1px 15px rgba(0,255,255,0.5); }
+p { margin:20px 0; font-size:1.1rem; color:#ddd; text-shadow:0 0 5px #0ff; }
+ul { list-style:none; padding:0; }
+ul li { background: rgba(255,255,255,0.05); margin:12px 0; padding:18px 22px; border-radius:20px; backdrop-filter: blur(6px); box-shadow:0 0 25px rgba(0,255,255,0.1); display:flex; align-items:center; transition:0.4s; filter: drop-shadow(0 0 5px #0ff);}
+ul li:hover { transform: translateY(-8px); box-shadow:0 0 35px rgba(0,255,255,0.3); background: rgba(0,255,255,0.1); filter: drop-shadow(0 0 10px #0ff);}
+ul li::before { content:"⭐"; margin-left:10px; font-size:1.2rem; animation: starPulse 2s infinite;}
+@keyframes starPulse {0%,100%{ transform: scale(1);}50%{ transform: scale(1.4);} }
+
+.slider-container { position: relative; overflow: hidden; border-radius: 25px; margin: 40px 0; width: 100%; }
+.slider { position: relative; width: 100%; }
+.slider img { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: auto; max-width:100%; opacity: 0; transition: opacity 1.5s ease-in-out; border-radius:25px; }
+.slider img.active { opacity: 1; }
+
+/* دکمه‌ها */
+.buttons { text-align:center; margin-top:35px; }
+.buttons a { display:inline-block; margin:12px; padding:16px 32px; border-radius:15px; text-decoration:none; color:#fff; font-weight:bold; font-size:16px; transition: all 0.4s; box-shadow: 0 0 20px #0ff; }
+.buttons a:hover { transform: scale(1.1); box-shadow: 0 0 60px #0ff; }
+.bazar { background: linear-gradient(45deg,#00c853,#b2ff59);}
+.myket { background: linear-gradient(45deg,#ff1744,#ff5252); cursor:default; }
+
+.new-features { background: rgba(255,255,255,0.05); padding:25px; border-radius:20px; margin-top:45px; backdrop-filter: blur(6px); box-shadow:0 0 35px rgba(0,255,255,0.1);}
+.new-features ul li { margin-bottom:14px; font-size:1.05rem; color:#ddd; display:flex; align-items:center; filter: drop-shadow(0 0 5px #0ff);}
+.new-features li::before { content:"✨"; margin-left:10px; font-size:1.2rem; animation: sparkle 2s infinite;}
+@keyframes sparkle {0%,100%{transform:scale(1);}50%{transform:scale(1.4);} }
+
+footer { text-align:center; padding:25px; }
+footer .support-box {
+  display:inline-block;
+  padding:14px 28px;
+  border-radius:18px;
+  background: linear-gradient(45deg, rgba(0,255,255,0.15), rgba(0,255,255,0.05));
+  box-shadow: 0 0 25px rgba(0,255,255,0.4);
+  backdrop-filter: blur(6px);
+  font-size:16px;
+  font-weight:bold;
+  color:#fff;
+  text-shadow:0 0 12px #0ff;
+}
+footer .support-box a { color:#0ff; text-decoration:none; }
+
+@media(max-width:600px){ 
+  section{padding:20px;} 
+  .buttons a{padding:12px 20px;font-size:14px;} 
+  footer .support-box{padding:12px 20px; font-size:14px;} 
+}
+</style>
+</head>
+<body>
+
+<canvas id="stars"></canvas>
+
+<header>
+  <img src="https://cdn.imgurl.ir/uploads/q149985_IMG_20250813_142213_173.jpg" alt="گادتوشاپ">
+</header>
+
+<section>
+<h1>درباره گادتوشاپ</h1>
+<p>گادتوشاپ یک اپلیکیشن نوآورانه و قابل اعتماد است که خدمات متنوعی همچون خرید جم، مدیریت و خرید و فروش اکانت، و ابزارهای اختصاصی برای گیمرها را در بستری امن و سریع ارائه می‌دهد. با طراحی مدرن و رابط کاربری روان، این اپ تجربه‌ای لذت‌بخش، کاربردی و حرفه‌ای را در اختیار کاربران خود می‌گذارد.</p>
+
+<h2>محصولات و امکانات اپلیکیشن</h2>
+<ul>
+<li>بخش پیشنهادات : مأموریت هایی براتون قرار داده شده فقط کافیه یکی رو انجام بدید تا همون جایزه ای که روی آگهی نوشته شده رو دریافت کنید</li>
+<li>بخش سنس ساز : ساخت و استفاده از سنس های حرفه ای برای بازی فری فایر</li>
+<li>واسطه گری امن : انجام معاملات خرید و فروش اکانت فری فایر با امنیت کامل</li>
+<li>بخش فروشگاه : خرید محصولات متنوع مانند مستر کارت و پنل Alltupup و ...</li>
+<li>بخش ماین کرافت : خرید اکانت های پرمیوم ماین کرافت و آیتم‌های اختصاصی این گیم</li>
+  <li>
+    بخش پیشنهادات : در این بخش می‌توانید مأموریت‌هایی که ثبت شده‌اند را مشاهده کرده و در صورت تمایل آنها را انجام دهید.  
+    پس از تکمیل مأموریت کافیست به پشتیبانی پیام دهید تا جوایز تعیین شده برای هر مأموریت را دریافت کنید.
+  </li>
+  <li>پشتیبانی از ساعت 10 تا 24</li>
+</ul>
+
+<div class="buttons">
+<a class="myket">⏳ نصب از مایکت (به زودی)</a>
+<a href="https://cafebazaar.ir/app/GODTOSHOP.COM" class="bazar">📥 نصب از بازار</a>
+</div>
+
+<h2>آنچه در آپدیت‌های آینده خواهید دید</h2>
+<div class="slider-container">
+  <div class="slider">
+    <img src="https://cdn.imgurl.ir/uploads/n439745_Screenshot__.jpg" alt="تصویر 1" class="active">
+    <img src="https://cdn.imgurl.ir/uploads/h7643_Screenshot__.jpg" alt="تصویر 2">
+    <img src="https://cdn.imgurl.ir/uploads/u829209_Screenshot__.jpg" alt="تصویر 3">
+  </div>
+</div>
+
+<div class="new-features">
+<h2>✨ تغییرات نسخه جدید</h2>
+<ul>
+<li>بهبود رابط کاربری و طراحی جذاب‌تر✔️</li>
+<li>اضافه شدن امکانات جدید در بخش سنس‌ساز✔️</li>
+<li>مشکلات درگاه پرداخت برطرف شد✔️</li>
+<li>بهینه‌سازی سرعت اپلیکیشن و تجربه کاربری بهتر✔️</li>
+</ul>
+</div>
+</section>
+
+<footer>
+  <div class="support-box">
+    📞 شماره تلفن پشتیبانی: 
+    <a href="tel:09193963732">09193963732</a>
+  </div>
+</footer>
+
+<script>
+// اسلایدر Fade و تنظیم ارتفاع خودکار
+const slides = document.querySelectorAll('.slider img');
+const sliderContainer = document.querySelector('.slider-container');
+let current = 0;
+
+function resizeSlider() {
+  const activeImg = slides[current];
+  if(activeImg.complete){
+    sliderContainer.style.height = activeImg.naturalHeight * (sliderContainer.offsetWidth / activeImg.naturalWidth) + 'px';
+  } else {
+    activeImg.onload = () => resizeSlider();
+  }
+}
+
+window.addEventListener('load', () => {
+  slides[current].classList.add('active');
+  resizeSlider();
+  setInterval(() => {
+    slides[current].classList.remove('active');
+    current = (current + 1) % slides.length;
+    slides[current].classList.add('active');
+    resizeSlider();
+  }, 5000);
+});
+
+window.addEventListener('resize', resizeSlider);
+
+// پس‌زمینه ستاره‌ها
+const canvas=document.getElementById('stars');
+const ctx=canvas.getContext('2d');
+let W=canvas.width=window.innerWidth;
+let H=canvas.height=window.innerHeight;
+let stars=[];
+for(let i=0;i<600;i++){
+  stars.push({x:Math.random()*W, y:Math.random()*H, r:Math.random()*1.5+0.5, dx:(Math.random()-0.5)*0.6, dy:(Math.random()-0.5)*0.6, glow:Math.random()*0.7+0.3});
+}
+let shootingStars=[];
+function createShootingStar(){ shootingStars.push({x:Math.random()*W, y:Math.random()*H/2, length: Math.random()*80+50, speed:Math.random()*10+6}); }
+setInterval(()=>{ if(Math.random()<0.05) createShootingStar(); },1000);
+function drawStars(){
+  ctx.clearRect(0,0,W,H);
+  stars.forEach(s=>{
+    ctx.beginPath();
+    ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+    let gradient=ctx.createRadialGradient(s.x,s.y,s.r*0.3,s.x,s.y,s.r*4);
+    gradient.addColorStop(0,"rgba(0,255,255,"+s.glow+")");
+    gradient.addColorStop(1,"rgba(0,255,255,0)");
+    ctx.fillStyle=gradient;
+    ctx.fill();
+    s.x+=s.dx; s.y+=s.dy;
+    if(s.x<0)s.x=W; if(s.x>W)s.x=0;
+    if(s.y<0)s.y=H; if(s.y>H)s.y=0;
+  });
+  shootingStars.forEach((sh,index)=>{
+    ctx.beginPath();
+    ctx.moveTo(sh.x,sh.y);
+    ctx.lineTo(sh.x+sh.length,sh.y+sh.length*0.2);
+    ctx.strokeStyle="rgba(0,255,255,0.8)";
+    ctx.lineWidth=2;
+    ctx.stroke();
+    sh.x += sh.speed;
+    sh.y += sh.speed*0.2;
+    if(sh.x>W || sh.y>H) shootingStars.splice(index,1);
+  });
+  requestAnimationFrame(drawStars);
+}
+drawStars();
+window.addEventListener('resize',()=>{ W=canvas.width=window.innerWidth; H=canvas.height=window.innerHeight; });
+</script>
+
+</body>
+</html>
