@@ -18,25 +18,32 @@ body {
 }
 canvas#stars { position:fixed; top:0; left:0; width:100%; height:100%; z-index:-1; }
 
+/* باکس پشتیبانی */
 footer {
   text-align:center;
-  padding:25px;
+  padding:35px 20px;
 }
 footer .support-box {
   display:inline-block;
-  padding:14px 28px;
-  border-radius:18px;
+  padding:18px 28px;
+  border-radius:22px;
   background: linear-gradient(45deg, rgba(0,255,255,0.15), rgba(0,255,255,0.05));
-  box-shadow: 0 0 25px rgba(0,255,255,0.4);
+  box-shadow: 0 0 25px rgba(0,255,255,0.6);
   backdrop-filter: blur(6px);
-  font-size:16px;
+  font-size:17px;
   font-weight:bold;
   color:#fff;
   text-shadow:0 0 12px #0ff;
+  animation: glowBox 3s infinite alternate;
 }
 footer .support-box a {
   color:#0ff;
   text-decoration:none;
+  font-weight:900;
+}
+@keyframes glowBox {
+  from { box-shadow:0 0 15px rgba(0,255,255,0.4);}
+  to   { box-shadow:0 0 45px rgba(0,255,255,0.9);}
 }
 </style>
 </head>
@@ -46,8 +53,8 @@ footer .support-box a {
 
 <footer>
   <div class="support-box">
-    اگر در این بخش جوابی دریافت نکردید، به پشتیبانی ما در روبیکا پیام دهید:<br>
-    👉 <a href="https://rubika.ir/GODTOSHOP_SUPPORT" target="_blank">rubika.ir/GODTOSHOP_SUPPORT</a>
+    ⚡ اگر پشتیبانی در سایت پاسخگو نبود،  
+    به <a href="https://rubika.ir/GODTOSHOP_SUPPORT" target="_blank">پشتیبانی‌های فعال ما در روبیکا</a> پیام دهید.
   </div>
 </footer>
 
