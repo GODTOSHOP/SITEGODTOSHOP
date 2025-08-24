@@ -3,47 +3,61 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>گادتوشاپ</title>
+<title>گادتوشاپ | پشتیبانی</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap');
 
+:root { --neon: #0ff; }
+
 body {
   margin:0;
-  padding:0;
-  font-family:'Vazirmatn', Tahoma, sans-serif;
-  overflow-x:hidden;
-  position:relative;
+  font-family:'Vazirmatn', sans-serif;
   background: linear-gradient(135deg,#0f0c29,#302b63,#24243e);
   color:#fff;
+  overflow:hidden;
 }
-canvas#stars { position:fixed; top:0; left:0; width:100%; height:100%; z-index:-1; }
 
-/* باکس پشتیبانی */
-footer {
+/* پس‌زمینه ستاره‌ها */
+canvas#stars {
+  position:fixed;
+  top:0;left:0;
+  width:100%;height:100%;
+  z-index:0;
+  pointer-events:none;
+}
+
+/* لایه اصلی محتوا */
+.main {
+  position:relative;
+  z-index:1;
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
   text-align:center;
-  padding:35px 20px;
+  padding:20px;
 }
-footer .support-box {
-  display:inline-block;
-  padding:18px 28px;
-  border-radius:22px;
-  background: linear-gradient(45deg, rgba(0,255,255,0.15), rgba(0,255,255,0.05));
-  box-shadow: 0 0 25px rgba(0,255,255,0.6);
-  backdrop-filter: blur(6px);
-  font-size:17px;
+
+/* باکس نئونی پشتیبانی */
+.support-box {
+  background: rgba(0,255,255,0.1);
+  padding:20px 30px;
+  border-radius:20px;
+  box-shadow:0 0 25px rgba(0,255,255,0.6);
+  text-shadow:0 0 12px var(--neon);
+  font-size:18px;
   font-weight:bold;
-  color:#fff;
-  text-shadow:0 0 12px #0ff;
-  animation: glowBox 3s infinite alternate;
+  backdrop-filter:blur(6px);
+  animation:glow 2s infinite alternate;
 }
-footer .support-box a {
-  color:#0ff;
+.support-box a {
+  color:var(--neon);
   text-decoration:none;
   font-weight:900;
 }
-@keyframes glowBox {
-  from { box-shadow:0 0 15px rgba(0,255,255,0.4);}
-  to   { box-shadow:0 0 45px rgba(0,255,255,0.9);}
+@keyframes glow {
+  from { box-shadow:0 0 15px rgba(0,255,255,0.4); }
+  to   { box-shadow:0 0 45px rgba(0,255,255,0.8); }
 }
 </style>
 </head>
@@ -51,76 +65,61 @@ footer .support-box a {
 
 <canvas id="stars"></canvas>
 
-<footer>
+<div class="main">
   <div class="support-box">
-    ⚡ اگر پشتیبانی در سایت پاسخگو نبود،  
-    به <a href="https://rubika.ir/GODTOSHOP_SUPPORT" target="_blank">پشتیبانی‌های فعال ما در روبیکا</a> پیام دهید.
+    اگر از طریق پشتیبانی داخل سایت پاسخی دریافت نکردید،<br>
+    می‌توانید به پشتیبانی فعال ما در روبیکا پیام دهید:<br><br>
+    <a href="https://rubika.ir/GODTOSHOP_SUPPORT" target="_blank">
+      پشتیبانی روبیکا
+    </a>
   </div>
-</footer>
+</div>
 
+<!-- اسکریپت ستاره‌ها -->
 <script>
-// پس‌زمینه ستاره‌ها
 const canvas=document.getElementById('stars');
 const ctx=canvas.getContext('2d');
-let W=canvas.width=window.innerWidth;
-let H=canvas.height=window.innerHeight;
 let stars=[];
-for(let i=0;i<600;i++){
-  stars.push({x:Math.random()*W, y:Math.random()*H, r:Math.random()*1.5+0.5, dx:(Math.random()-0.5)*0.6, dy:(Math.random()-0.5)*0.6, glow:Math.random()*0.7+0.3});
+function resize(){canvas.width=innerWidth;canvas.height=innerHeight;}
+resize();window.addEventListener('resize',resize);
+
+for(let i=0;i<150;i++){
+  stars.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*2+1,d:Math.random()*0.5});
 }
-let shootingStars=[];
-function createShootingStar(){ shootingStars.push({x:Math.random()*W, y:Math.random()*H/2, length: Math.random()*80+50, speed:Math.random()*10+6}); }
-setInterval(()=>{ if(Math.random()<0.05) createShootingStar(); },1000);
-function drawStars(){
-  ctx.clearRect(0,0,W,H);
+function draw(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.fillStyle="white";
   stars.forEach(s=>{
     ctx.beginPath();
     ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
-    let gradient=ctx.createRadialGradient(s.x,s.y,s.r*0.3,s.x,s.y,s.r*4);
-    gradient.addColorStop(0,"rgba(0,255,255,"+s.glow+")");
-    gradient.addColorStop(1,"rgba(0,255,255,0)");
-    ctx.fillStyle=gradient;
     ctx.fill();
-    s.x+=s.dx; s.y+=s.dy;
-    if(s.x<0)s.x=W; if(s.x>W)s.x=0;
-    if(s.y<0)s.y=H; if(s.y>H)s.y=0;
   });
-  shootingStars.forEach((sh,index)=>{
-    ctx.beginPath();
-    ctx.moveTo(sh.x,sh.y);
-    ctx.lineTo(sh.x+sh.length,sh.y+sh.length*0.2);
-    ctx.strokeStyle="rgba(0,255,255,0.8)";
-    ctx.lineWidth=2;
-    ctx.stroke();
-    sh.x += sh.speed;
-    sh.y += sh.speed*0.2;
-    if(sh.x>W || sh.y>H) shootingStars.splice(index,1);
-  });
-  requestAnimationFrame(drawStars);
+  update();
 }
-drawStars();
-window.addEventListener('resize',()=>{ W=canvas.width=window.innerWidth; H=canvas.height=window.innerHeight; });
+function update(){
+  stars.forEach(s=>{
+    s.y+=s.d;
+    if(s.y>canvas.height){s.y=0;s.x=Math.random()*canvas.width;}
+  });
+}
+setInterval(draw,50);
 </script>
 
-<!-- Chatina Widget -->
+<!-- کد ویجت چت Chatina -->
 <script>
-window.addEventListener("load", function () {
-  var t = "684005f9e231639ad8d7549e";
-  window.chatina = { bId: t };
-
-  var e = document.createElement("div");
-  e.id = "chatina-root";
-  document.body.appendChild(e);
-
-  var n = document.createElement("link");
-  n.rel = "stylesheet";
-  n.href = "https://cdn.chatina.ai/static/widget.css";
-  n.crossOrigin = "anonymous";
+window.addEventListener("load",function(){
+  var t="684005f9e231639ad8d7549e";
+  window.chatina={bId:t};
+  var e=document.createElement("div");
+  e.id="chatina-root";document.body.appendChild(e);
+  var n=document.createElement("link");
+  n.rel="stylesheet";
+  n.href="https://cdn.chatina.ai/static/widget.css";
+  n.crossOrigin="anonymous";
   document.head.appendChild(n);
-
-  var a = document.createElement("script");
-  a.src = "https://cdn.chatina.ai/static/widget.js";
-  a.crossOrigin = "anonymous";
+  var a=document.createElement("script");
+  a.src="https://cdn.chatina.ai/static/widget.js";
+  a.crossOrigin="anonymous";
   document.head.appendChild(a);
 });
 </script>
